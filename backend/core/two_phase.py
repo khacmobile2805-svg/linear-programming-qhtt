@@ -28,7 +28,9 @@ def solve_standard(S, rule='dantzig') -> dict:
         steps.append({'phase': 'Pha 1', 'enter': 'x0', 'leave': D.names[D.B[l]],
                       'dict_before': D.render('δ'), 'degenerate_step': D.b[l]==0})
         D.pivot(l, e)
-        primal_simplex(D, steps, 'Pha 1', 'δ', rule)
+        st1 = primal_simplex(D, steps, 'Pha 1', 'δ', rule)
+        if st1 == 'cycling':
+            return {'status': 'cycling', 'steps': steps, 'dict': None}
         if D.z0 > 0:
             return {'status': 'infeasible', 'steps': steps, 'dict': None}
         if X0 in D.B:
@@ -47,6 +49,8 @@ def solve_standard(S, rule='dantzig') -> dict:
                 for j in range(len(D.N))]
 
     status = primal_simplex(D, steps, 'Pha 2' if need_p1 else 'Đơn hình', 'z', rule)
+    if status == 'cycling':
+        return {'status': 'cycling', 'steps': steps, 'dict': None}
     if status == 'unbounded':
         return {'status': 'unbounded', 'steps': steps, 'dict': None}
     return {'status': 'optimal', 'steps': steps, 'dict': D}

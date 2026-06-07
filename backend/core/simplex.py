@@ -89,9 +89,13 @@ def ratio_test(D, e):
     return l, (best == Fraction(0)) if l != -1 else False
 
 
-def primal_simplex(D, steps, phase_label, obj_label, rule='dantzig'):
-    """Tối ưu hóa D. Trả về 'optimal'/'unbounded'."""
+def primal_simplex(D, steps, phase_label, obj_label, rule='dantzig', max_iter=20000):
+    """Tối ưu hóa D. Trả về 'optimal'/'unbounded'/'cycling'."""
+    it = 0
     while True:
+        it += 1
+        if it > max_iter:        # chặn xoay vòng vô hạn (suy biến + Dantzig)
+            return 'cycling'
         e = choose_entering(D, rule)
         if e == -1:
             return 'optimal'

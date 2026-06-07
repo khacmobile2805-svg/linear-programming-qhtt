@@ -5,6 +5,7 @@ from ..models.variable import VariableSign
 from ..models.constraint import ConstraintOp
 from ..models.objective import ObjectiveSense
 from ..models.standard_problem import StandardProblem
+from ..utils.formatting import fmt
 
 
 def standardize(problem) -> StandardProblem:
@@ -69,4 +70,25 @@ def describe_substitution(S) -> str:
             lines.append(f"x{j+1} = -{S.var_names[cols[0][0]]}  (x{j+1} <= 0)")
         else:
             lines.append(f"x{j+1} = {S.var_names[cols[0][0]]} - {S.var_names[cols[1][0]]}  (x{j+1} tự do)")
+    return "\n".join(lines)
+
+
+def _lin(coeffs, names):
+    parts = []
+    for k, c in enumerate(coeffs):
+        if c == 0: continue
+        sgn = '+' if c > 0 else '-'
+        mag = abs(c); ms = '' if mag == 1 else fmt(mag)
+        term = f"{ms}{names[k]}" if ms else names[k]
+        parts.append(term if not parts and sgn == '+' else f"{sgn} {term}")
+    return " ".join(parts) if parts else "0"
+
+
+def describe_standard(S) -> str:
+    """In bài toán DẠNG CHUẨN min tương đương (để đưa vào báo cáo)."""
+    names = S.var_names
+    lines = [f"min  z = {_lin(S.c, names)}", "v.đk:"]
+    for i in range(len(S.A)):
+        lines.append(f"     {_lin(S.A[i], names)} <= {fmt(S.b[i])}")
+    lines.append(f"     {', '.join(names)} >= 0")
     return "\n".join(lines)
