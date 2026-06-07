@@ -14,46 +14,69 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{
-  --ink:#1a1d24; --ink2:#565b63; --ink3:#9098a1;
-  --bg:#ffffff; --line:#ececec; --line2:#f5f5f4;
-  --accent:#36546f; --accent-soft:#eef2f6;
-  --green:#2f6b4f; --green-lt:#eaf5ef; --red:#9a3b3b; --red-lt:#f7ebeb;
-  --amber:#8a6420; --amber-lt:#f6efe0;
+  --ink:#1c2230; --ink2:#4a5160; --ink3:#8a93a3;
+  --bg:#f4f6f9; --panel:#ffffff; --line:#e7eaf0; --line2:#f0f2f6;
+  --field:#1f242e; --field-bd:#2b3340; --field-tx:#eef1f6;
+  --accent:#2c7a7b; --accent2:#236260; --accent-soft:#e3f0f0;
+  --green:#2f6b4f; --green-lt:#e6f4ec; --red:#9a3b3b; --red-lt:#f7eaea;
+  --amber:#8a6420; --amber-lt:#f6efde;
 }
 [data-testid="stAppViewContainer"]{ background:var(--bg); }
-[data-testid="stMainBlockContainer"]{ max-width:1020px; padding-top:1.6rem; }
+[data-testid="stMainBlockContainer"]{ max-width:1100px; padding-top:2.8rem; }
 html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
-.mast{ text-align:center; border-bottom:1px solid var(--line); padding-bottom:1.2rem; margin-bottom:2rem; }
-.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-size:2.05rem; font-weight:400;
-  color:var(--ink); line-height:1.2; text-transform:uppercase; letter-spacing:.01em; margin:0; }
-.mast .s{ font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink3); margin-top:.6rem; }
+
+/* Tiêu đề 1 dòng, không bị che */
+.mast{ text-align:center; border-bottom:1px solid var(--line); padding:.3rem 0 1.2rem; margin-bottom:1.9rem; }
+.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-weight:400; color:var(--ink);
+  font-size:clamp(.85rem,1.75vw,1.4rem); line-height:1.55; text-transform:uppercase; white-space:nowrap; margin:0; }
+.mast .s{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink3); margin-top:.5rem; }
+
 .slabel{ display:flex; align-items:center; gap:.55rem; font-size:.7rem; font-weight:600;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); margin:0 0 .8rem; }
 .slabel .n{ display:inline-flex; align-items:center; justify-content:center; width:20px;height:20px;
   border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.66rem; font-weight:700; }
-[data-testid="stVerticalBlockBorderWrapper"]{ background:#fff; border-color:var(--line)!important; border-radius:10px!important; }
-[data-testid="stNumberInput"] input{ font-family:'JetBrains Mono',monospace!important; text-align:center!important; }
-[data-testid="stSidebar"]{ background:#fafaf9; border-right:1px solid var(--line); }
+
+/* Panel mượt: bóng nhẹ + hiệu ứng nâng khi rê chuột */
+[data-testid="stVerticalBlockBorderWrapper"]{ background:var(--panel); border-color:var(--line)!important;
+  border-radius:12px!important; box-shadow:0 1px 3px rgba(20,30,50,.05); transition:box-shadow .2s ease; }
+[data-testid="stVerticalBlockBorderWrapper"]:hover{ box-shadow:0 6px 20px rgba(20,30,50,.09); }
+
+/* Ô NHẬP MÀU ĐEN, chữ sáng, bo góc, viền sáng khi focus */
+[data-testid="stNumberInput"] input{ background:var(--field)!important; color:var(--field-tx)!important;
+  border:1px solid var(--field-bd)!important; border-radius:8px!important;
+  font-family:'JetBrains Mono',monospace!important; text-align:center!important; transition:border-color .15s, box-shadow .15s; }
+[data-testid="stNumberInput"] input:focus{ border-color:var(--accent)!important; box-shadow:0 0 0 3px var(--accent-soft)!important; }
+[data-testid="stNumberInput"] button{ background:var(--field)!important; color:var(--field-tx)!important; border-color:var(--field-bd)!important; }
+[data-testid="stNumberInput"] button:hover{ background:#2a3240!important; }
+[data-baseweb="select"]>div{ background:var(--field)!important; border:1px solid var(--field-bd)!important; border-radius:8px!important; }
+[data-baseweb="select"] div, [data-baseweb="select"] span{ color:var(--field-tx)!important; font-family:'JetBrains Mono',monospace!important; }
+[data-baseweb="select"] svg{ fill:var(--field-tx)!important; }
+ul[role="listbox"]{ background:#fff!important; }
+li[role="option"]{ color:var(--ink)!important; background:#fff!important; }
+li[role="option"]:hover{ background:var(--accent-soft)!important; }
+
+[data-testid="stSidebar"]{ background:#fafbfc; border-right:1px solid var(--line); }
 [data-testid="stSidebar"] *{ color:var(--ink2)!important; }
-.sb-greek{ font-family:'Agbalumo',serif; font-size:2.1rem; color:var(--accent)!important; line-height:1; }
-.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.3rem; color:var(--ink)!important; line-height:1.1; }
+.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.15rem; color:var(--ink)!important; line-height:1.25; font-weight:600; }
 .sb-desc{ font-size:.72rem; color:var(--ink3)!important; letter-spacing:.03em; }
 .sb-h{ font-size:.68rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3)!important; margin:.2rem 0 .4rem;}
+
 .rline{ border-top:1px solid var(--line); margin:2rem 0 1.3rem; }
 .pill{ display:inline-flex; align-items:center; gap:.4rem; font-size:.74rem; font-weight:600;
   letter-spacing:.07em; text-transform:uppercase; padding:5px 13px; border-radius:100px; }
 .p-opt{ background:var(--green-lt); color:var(--green);} .p-inf{ background:var(--red-lt); color:var(--red);}
 .p-unb{ background:var(--amber-lt); color:var(--amber);}
-.rcard{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.3rem; }
+.rcard{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.3rem; box-shadow:0 1px 3px rgba(20,30,50,.05); }
 .rcard .zlb{ font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3);}
 .rcard .zv{ font-family:'Source Serif 4',serif; font-size:1.85rem; font-weight:700; color:var(--accent); }
 .rtab{ width:100%; border-collapse:collapse; font-family:'JetBrains Mono',monospace; font-size:.92rem; margin-top:.3rem;}
-.rtab th{ border-bottom:1.5px solid var(--ink); padding:6px 14px; color:var(--ink2); background:#fbfbfa;}
+.rtab th{ border-bottom:1.5px solid var(--ink); padding:6px 14px; color:var(--ink2); background:var(--line2);}
 .rtab td{ border-bottom:1px solid var(--line2); padding:7px 14px; text-align:center; color:var(--ink);}
-div.stButton>button[kind="primary"]{ background:var(--ink)!important; border:none!important;
-  border-radius:8px!important; font-weight:600!important; letter-spacing:.02em!important; }
-div.stButton>button[kind="primary"]:hover{ background:#000!important; }
-[data-testid="stExpander"]{ border:1px solid var(--line)!important; border-radius:8px!important; background:#fff!important;}
+div.stButton>button[kind="primary"]{ background:var(--accent)!important; border:none!important; color:#fff!important;
+  border-radius:9px!important; font-weight:600!important; letter-spacing:.02em!important; transition:background .18s, transform .1s; }
+div.stButton>button[kind="primary"]:hover{ background:var(--accent2)!important; }
+div.stButton>button[kind="primary"]:active{ transform:translateY(1px); }
+[data-testid="stExpander"]{ border:1px solid var(--line)!important; border-radius:10px!important; background:var(--panel)!important;}
 h1,h2,h3,h4{ color:var(--ink)!important; } hr{ border-color:var(--line); }
 </style>
 """, unsafe_allow_html=True)
@@ -85,7 +108,7 @@ SIGNS=['x ≥ 0','x ≤ 0','tự do']; SMAP={'x ≥ 0':'>=0','x ≤ 0':'<=0','t�
 
 # ──────────────────── Sidebar (đã bỏ Nạp ví dụ + caption) ────────────────────
 with st.sidebar:
-    st.markdown('<div class="sb-greek">∑</div><div class="sb-brand">LP Solver</div>'
+    st.markdown('<div class="sb-brand">Linear Programming Solver</div>'
                 '<div class="sb-desc">Quy hoạch tuyến tính · K23</div><hr>', unsafe_allow_html=True)
     st.markdown('<div class="sb-h">⑧ Quy tắc chọn biến vào</div>', unsafe_allow_html=True)
     rule_lbl = st.radio('rule', ['Mặc định — âm nhất (Dantzig)', 'Bland — chỉ số nhỏ nhất'],
