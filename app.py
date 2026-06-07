@@ -15,9 +15,9 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{
   --ink:#1c2230; --ink2:#4a5160; --ink3:#8a93a3;
-  --bg:#f4f6f9; --panel:#ffffff; --line:#e7eaf0; --line2:#f0f2f6;
+  --bg:#f4f6fb; --panel:#ffffff; --line:#e7eaf0; --line2:#f0f2f6;
   --field:#1f242e; --field-bd:#2b3340; --field-tx:#eef1f6;
-  --accent:#2c7a7b; --accent2:#236260; --accent-soft:#e3f0f0;
+  --accent:#1d4ed8; --accent2:#1e40af; --accent-soft:#e7eefc;
   --green:#2f6b4f; --green-lt:#e6f4ec; --red:#9a3b3b; --red-lt:#f7eaea;
   --amber:#8a6420; --amber-lt:#f6efde;
 }
@@ -26,10 +26,12 @@ st.markdown("""
 html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
 
 /* Tiêu đề 1 dòng, không bị che */
-.mast{ text-align:center; border-bottom:1px solid var(--line); padding:.3rem 0 1.2rem; margin-bottom:1.9rem; }
-.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-weight:400; color:var(--ink);
-  font-size:clamp(.85rem,1.75vw,1.4rem); line-height:1.55; text-transform:uppercase; white-space:nowrap; margin:0; }
-.mast .s{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink3); margin-top:.5rem; }
+.mast{ background:linear-gradient(135deg,#1d4ed8 0%,#3b6cf0 100%); border-radius:14px; text-align:center;
+  padding:1.45rem 1.6rem; margin-bottom:1.9rem; box-shadow:0 8px 24px rgba(29,78,216,.24); }
+.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-weight:400; color:#ffffff;
+  font-size:clamp(.85rem,1.75vw,1.4rem); line-height:1.5; text-transform:uppercase; white-space:nowrap; margin:0;
+  text-shadow:0 1px 2px rgba(0,0,0,.12); }
+.mast .s{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-top:.5rem; }
 
 .slabel{ display:flex; align-items:center; gap:.55rem; font-size:.7rem; font-weight:600;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); margin:0 0 .8rem; }
