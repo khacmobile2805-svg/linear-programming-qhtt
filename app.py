@@ -14,77 +14,178 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{
-  --ink:#1c2230; --ink2:#4a5160; --ink3:#8a93a3;
-  --bg:#f4f6fb; --panel:#ffffff; --line:#e7eaf0; --line2:#f0f2f6;
-  /* Đã sửa màu ô input: nền xám nhạt, viền xám, chữ đen */
-  --field:#e9ecef; --field-bd:#ced4da; --field-tx:#1c2230;
-  --accent:#1d4ed8; --accent2:#1e40af; --accent-soft:#e7eefc;
-  --green:#2f6b4f; --green-lt:#e6f4ec; --red:#9a3b3b; --red-lt:#f7eaea;
-  --amber:#8a6420; --amber-lt:#f6efde;
+  --ink:#e2e8f0; --ink2:#94a3b8; --ink3:#64748b;
+
+  /* NAVY & ORANGE — tông tối sang trọng */
+  --bg-top: #0f172a;
+  --bg-bottom: #1e3a5f;
+  --panel: #1a2744;
+  --line: #2a3f5f;
+  --line2: #1e2f4a;
+
+  /* Ô nhập liệu: tối, viền navy nhạt, chữ sáng */
+  --field: #0f1f38;
+  --field-bd: #2a3f5f;
+  --field-tx: #e2e8f0;
+
+  /* Accent chính: Cam nổi bật */
+  --accent:#ea580c; --accent2:#c2410c; --accent-soft:rgba(234,88,12,.15);
+
+  /* Trạng thái kết quả */
+  --green:#86efac; --green-lt:rgba(134,239,172,.12); --red:#fca5a5; --red-lt:rgba(252,165,165,.12);
+  --amber:#fcd34d; --amber-lt:rgba(252,211,77,.12);
 }
 
-/* Chia đôi background: Nửa trái màu nền cũ (#f4f6fb), nửa phải màu trắng tinh (#ffffff) */
-[data-testid="stAppViewContainer"]{ background: linear-gradient(90deg, var(--bg) 50%, #ffffff 50%); }
+/* Nền gradient navy */
+[data-testid="stAppViewContainer"]{
+    background: linear-gradient(135deg, var(--bg-top) 0%, var(--bg-bottom) 100%) !important;
+    min-height: 100vh;
+}
 [data-testid="stHeader"] { background-color: transparent !important; }
 [data-testid="stMainBlockContainer"]{ max-width:1100px; padding-top:2.8rem; }
 html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
 
-/* Tiêu đề 1 dòng, không bị che */
-.mast{ background:linear-gradient(135deg,#1d4ed8 0%,#3b6cf0 100%); border-radius:14px; text-align:center;
-  padding:1.45rem 1.6rem; margin-bottom:1.9rem; box-shadow:0 8px 24px rgba(29,78,216,.24); }
-.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-weight:400; color:#ffffff;
+/* Tiêu đề — gradient cam đậm */
+.mast{
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #7c2d12 100%);
+  border: 1px solid rgba(234,88,12,.4);
+  border-radius:14px; text-align:center;
+  padding:1.45rem 1.6rem; margin-bottom:1.9rem;
+  box-shadow:0 8px 32px rgba(234,88,12,.25), 0 0 0 1px rgba(234,88,12,.1);
+}
+.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-weight:400; color:#fed7aa;
   font-size:clamp(.85rem,1.75vw,1.4rem); line-height:1.5; text-transform:uppercase; white-space:nowrap; margin:0;
-  text-shadow:0 1px 2px rgba(0,0,0,.12); }
-.mast .s{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-top:.5rem; }
+  text-shadow:0 1px 4px rgba(234,88,12,.4); }
+.mast .s{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(253,186,116,.75); margin-top:.5rem; }
 
 .slabel{ display:flex; align-items:center; gap:.55rem; font-size:.7rem; font-weight:600;
   letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); margin:0 0 .8rem; }
 .slabel .n{ display:inline-flex; align-items:center; justify-content:center; width:20px;height:20px;
-  border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.66rem; font-weight:700; }
+  border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.66rem; font-weight:700; border:1px solid rgba(234,88,12,.3); }
 
-/* Panel mượt: bóng nhẹ + hiệu ứng nâng khi rê chuột */
-[data-testid="stVerticalBlockBorderWrapper"]{ background:var(--panel); border-color:var(--line)!important;
-  border-radius:12px!important; box-shadow:0 1px 3px rgba(20,30,50,.05); transition:box-shadow .2s ease; }
-[data-testid="stVerticalBlockBorderWrapper"]:hover{ box-shadow:0 6px 20px rgba(20,30,50,.09); }
+/* Panel cards — nền navy panel */
+[data-testid="stVerticalBlockBorderWrapper"]{
+  background:var(--panel) !important;
+  border-color:var(--line) !important;
+  border-radius:12px !important;
+  box-shadow:0 2px 12px rgba(0,0,0,.3);
+  transition:box-shadow .2s ease, border-color .2s ease;
+}
+[data-testid="stVerticalBlockBorderWrapper"]:hover{
+  box-shadow:0 8px 28px rgba(234,88,12,.15);
+  border-color:rgba(234,88,12,.35) !important;
+}
 
-/* Ô NHẬP LIỆU: bo góc, viền sáng khi focus */
-[data-testid="stNumberInput"] input{ background:var(--field)!important; color:var(--field-tx)!important;
+/* Ô nhập liệu */
+[data-testid="stNumberInput"] input{
+  background:var(--field) !important; color:var(--field-tx) !important;
   -webkit-text-fill-color: var(--field-tx) !important;
-  border:1px solid var(--field-bd)!important; border-radius:8px!important;
-  font-family:'JetBrains Mono',monospace!important; text-align:center!important; transition:border-color .15s, box-shadow .15s; }
-[data-testid="stNumberInput"] input:focus{ border-color:var(--accent)!important; box-shadow:0 0 0 3px var(--accent-soft)!important; }
-[data-testid="stNumberInput"] button{ background:var(--field)!important; color:var(--field-tx)!important; border-color:var(--field-bd)!important; }
-[data-testid="stNumberInput"] button:hover{ background:#d1d5db!important; }
-[data-baseweb="select"]>div{ background:var(--field)!important; border:1px solid var(--field-bd)!important; border-radius:8px!important; }
-[data-baseweb="select"] div, [data-baseweb="select"] span{ color:var(--field-tx)!important; -webkit-text-fill-color: var(--field-tx) !important; font-family:'JetBrains Mono',monospace!important; }
-[data-baseweb="select"] svg{ fill:var(--field-tx)!important; }
-ul[role="listbox"]{ background:#fff!important; }
-li[role="option"]{ color:var(--ink)!important; background:#fff!important; }
-li[role="option"]:hover{ background:var(--accent-soft)!important; }
+  border:1px solid var(--field-bd) !important; border-radius:8px !important;
+  font-family:'JetBrains Mono',monospace !important; text-align:center !important;
+  transition:border-color .15s, box-shadow .15s;
+}
+[data-testid="stNumberInput"] input:focus{
+  border-color:var(--accent) !important;
+  background:#0a1628 !important;
+  box-shadow:0 0 0 3px var(--accent-soft) !important;
+}
+[data-testid="stNumberInput"] button{
+  background:var(--field) !important; color:var(--ink2) !important; border-color:var(--field-bd) !important;
+}
+[data-testid="stNumberInput"] button:hover{ background:#1e2f4a !important; color:var(--accent) !important; }
 
-[data-testid="stSidebar"]{ background:#fafbfc; border-right:1px solid var(--line); }
-[data-testid="stSidebar"] *{ color:var(--ink2)!important; }
-.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.15rem; color:var(--ink)!important; line-height:1.25; font-weight:600; }
-.sb-desc{ font-size:.72rem; color:var(--ink3)!important; letter-spacing:.03em; }
-.sb-h{ font-size:.68rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3)!important; margin:.2rem 0 .4rem;}
+[data-baseweb="select"]>div{
+  background:var(--field) !important; border:1px solid var(--field-bd) !important;
+  border-radius:8px !important; transition:border-color .15s, box-shadow .15s;
+}
+[data-baseweb="select"]>div:focus-within{
+  border-color:var(--accent) !important; background:#0a1628 !important;
+  box-shadow:0 0 0 3px var(--accent-soft) !important;
+}
+[data-baseweb="select"] div, [data-baseweb="select"] span{
+  color:var(--field-tx) !important; -webkit-text-fill-color: var(--field-tx) !important;
+  font-family:'JetBrains Mono',monospace !important;
+}
+[data-baseweb="select"] svg{ fill:var(--ink2) !important; }
+ul[role="listbox"]{
+  background:#1a2744 !important; border:1px solid var(--line) !important;
+  border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.5) !important;
+}
+li[role="option"]{ color:var(--ink) !important; background:#1a2744 !important; }
+li[role="option"]:hover{ background:var(--accent-soft) !important; color:#fed7aa !important; }
+
+/* Sidebar */
+[data-testid="stSidebar"]{ background:#0d1b2e !important; border-right:1px solid var(--line); }
+[data-testid="stSidebar"] *{ color:var(--ink2) !important; }
+[data-testid="stSidebar"] .sb-brand{ color:#fed7aa !important; }
+.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.15rem; color:#fed7aa !important; line-height:1.25; font-weight:600; }
+.sb-desc{ font-size:.72rem; color:var(--ink3) !important; letter-spacing:.03em; }
+.sb-h{ font-size:.68rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--accent) !important; margin:.2rem 0 .4rem;}
+
+/* Radio & checkbox trong sidebar */
+[data-testid="stSidebar"] [data-testid="stRadio"] label,
+[data-testid="stSidebar"] [data-testid="stCheckbox"] label{ color:var(--ink) !important; }
+[data-testid="stSidebar"] [data-testid="stRadio"] p,
+[data-testid="stSidebar"] [data-testid="stCheckbox"] p{ color:var(--ink2) !important; }
 
 .rline{ border-top:1px solid var(--line); margin:2rem 0 1.3rem; }
+
+/* Pills kết quả */
 .pill{ display:inline-flex; align-items:center; gap:.4rem; font-size:.74rem; font-weight:600;
   letter-spacing:.07em; text-transform:uppercase; padding:5px 13px; border-radius:100px; }
-.p-opt{ background:var(--green-lt); color:var(--green);} .p-inf{ background:var(--red-lt); color:var(--red);}
-.p-unb{ background:var(--amber-lt); color:var(--amber);}
-.rcard{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.3rem; box-shadow:0 1px 3px rgba(20,30,50,.05); }
+.p-opt{ background:rgba(134,239,172,.12); color:var(--green); border:1px solid rgba(134,239,172,.25);}
+.p-inf{ background:rgba(252,165,165,.12); color:var(--red); border:1px solid rgba(252,165,165,.25);}
+.p-unb{ background:rgba(252,211,77,.12); color:var(--amber); border:1px solid rgba(252,211,77,.25);}
+
+/* Card kết quả */
+.rcard{
+  background:linear-gradient(135deg, #0f1f38 0%, #1a2744 100%);
+  border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.3rem;
+  box-shadow:0 2px 12px rgba(0,0,0,.3);
+}
 .rcard .zlb{ font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3);}
-.rcard .zv{ font-family:'Source Serif 4',serif; font-size:1.85rem; font-weight:700; color:var(--accent); }
+.rcard .zv{ font-family:'Source Serif 4',serif; font-size:1.85rem; font-weight:700; color:var(--accent); text-shadow:0 0 20px rgba(234,88,12,.4); }
+
+/* Bảng kết quả */
 .rtab{ width:100%; border-collapse:collapse; font-family:'JetBrains Mono',monospace; font-size:.92rem; margin-top:.3rem;}
-.rtab th{ border-bottom:1.5px solid var(--ink); padding:6px 14px; color:var(--ink2); background:var(--line2);}
+.rtab th{ border-bottom:1.5px solid var(--line); padding:6px 14px; color:var(--ink2); background:#0f1f38;}
 .rtab td{ border-bottom:1px solid var(--line2); padding:7px 14px; text-align:center; color:var(--ink);}
-div.stButton>button[kind="primary"]{ background:var(--accent)!important; border:none!important; color:#fff!important;
-  border-radius:9px!important; font-weight:600!important; letter-spacing:.02em!important; transition:background .18s, transform .1s; }
-div.stButton>button[kind="primary"]:hover{ background:var(--accent2)!important; }
-div.stButton>button[kind="primary"]:active{ transform:translateY(1px); }
-[data-testid="stExpander"]{ border:1px solid var(--line)!important; border-radius:10px!important; background:var(--panel)!important;}
-h1,h2,h3,h4{ color:var(--ink)!important; } hr{ border-color:var(--line); }
+
+/* Nút GIẢI BÀI TOÁN — cam nổi bật */
+div.stButton>button[kind="primary"]{
+  background:linear-gradient(135deg, #ea580c, #c2410c) !important;
+  border:none !important; color:#ffffff !important;
+  border-radius:9px !important; font-weight:600 !important; letter-spacing:.06em !important;
+  box-shadow:0 4px 16px rgba(234,88,12,.4) !important;
+  transition:all .18s !important;
+}
+div.stButton>button[kind="primary"]:hover{
+  background:linear-gradient(135deg, #f97316, #ea580c) !important;
+  box-shadow:0 6px 24px rgba(234,88,12,.6) !important;
+  transform:translateY(-1px) !important;
+}
+div.stButton>button[kind="primary"]:active{ transform:translateY(1px) !important; box-shadow:none !important; }
+
+/* Expander */
+[data-testid="stExpander"]{
+  border:1px solid var(--line) !important; border-radius:10px !important;
+  background:var(--panel) !important; box-shadow:0 2px 8px rgba(0,0,0,.2) !important;
+}
+[data-testid="stExpander"] summary:hover{ border-color:rgba(234,88,12,.35) !important; }
+
+/* Headings và text */
+h1,h2,h3,h4{ color:var(--ink) !important; }
+hr{ border-color:var(--line); }
+p, label, .stMarkdown{ color:var(--ink) !important; }
+
+/* Info/warning/error messages */
+[data-testid="stInfo"]{ background:rgba(234,88,12,.1) !important; border-color:rgba(234,88,12,.35) !important; color:#fed7aa !important; }
+[data-testid="stWarning"]{ background:rgba(252,211,77,.1) !important; border-color:rgba(252,211,77,.3) !important; color:var(--amber) !important; }
+[data-testid="stError"]{ background:rgba(252,165,165,.1) !important; border-color:rgba(252,165,165,.25) !important; color:var(--red) !important; }
+
+/* Code blocks */
+[data-testid="stCode"], .stCode{ background:#050d1a !important; border:1px solid var(--line) !important; color:#7dd3fc !important; }
+code{ color:#fbd38d !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -144,7 +245,7 @@ with st.container(border=True):
     for j in range(n):
         d = DEF['obj'][j] if j < len(DEF['obj']) else 0.0
         with cols[j]:
-            st.markdown(f'<div style="text-align:center;font-family:JetBrains Mono;color:#454b54">x<sub>{j+1}</sub></div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="text-align:center;font-family:JetBrains Mono;color:#94a3b8">x<sub>{j+1}</sub></div>', unsafe_allow_html=True)
             obj.append(st.number_input(f'c{j+1}', value=float(d), step=1.0, key=f'o{j}', format='%g', label_visibility='collapsed'))
 
 # ──────────────────── ③ Hệ ràng buộc ────────────────────
@@ -171,7 +272,7 @@ with st.container(border=True):
     for j in range(n):
         ds = DEF['signs'][j] if j < len(DEF['signs']) else 'x ≥ 0'
         with cols[j]:
-            st.markdown(f'<div style="text-align:center;font-family:JetBrains Mono;color:#454b54">x<sub>{j+1}</sub></div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="text-align:center;font-family:JetBrains Mono;color:#94a3b8">x<sub>{j+1}</sub></div>', unsafe_allow_html=True)
             signs.append(SMAP[st.selectbox(f's{j}', SIGNS, index=SIGNS.index(ds), key=f's{j}', label_visibility='collapsed')])
 
 # ──────────────────── Xem trước ────────────────────
@@ -196,7 +297,7 @@ if go:
         st.error(f'Lỗi: {e}'); st.stop()
 
     st.markdown('<div class="rline"></div>', unsafe_allow_html=True)
-    st.markdown('<h2 style="font-family:Source Serif 4,serif;font-weight:600">Kết quả</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 style="font-family:Source Serif 4,serif;font-weight:600;color:#e2e8f0">Kết quả</h2>', unsafe_allow_html=True)
     status = res['status']
 
     if status == 'optimal':
