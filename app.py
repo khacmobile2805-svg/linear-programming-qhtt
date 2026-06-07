@@ -2,7 +2,9 @@
 """app.py — Giao diện web Streamlit (bản trau chuốt). Chạy: streamlit run app.py"""
 import streamlit as st
 from fractions import Fraction
-from lp_solver import solve, fmt, draw_geometry
+from backend.core.solver import solve
+from backend.core.geometry import draw as geo_draw
+from backend.utils.formatting import fmt
 
 st.set_page_config(page_title='Giải QHTT tổng quát', page_icon='📐', layout='wide')
 
@@ -168,7 +170,7 @@ if st.button('🚀  GIẢI BÀI TOÁN', type='primary', use_container_width=True
     if show_geo and int(n)==2 and status in ('optimal','unbounded','infeasible'):
         sec('④', 'Phương pháp hình học')
         try:
-            st.pyplot(draw_geometry(sense, obj, constraints, signs, res), use_container_width=True)
+            st.pyplot(geo_draw(sense, obj, constraints, signs, res), use_container_width=True)
         except Exception as e:
             st.warning(f'Không vẽ được: {e}')
 
