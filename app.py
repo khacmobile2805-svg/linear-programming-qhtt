@@ -14,52 +14,46 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{
-  --ink:#20242b; --ink2:#454b54; --ink3:#717880;
-  --paper:#f7f6f2; --line:#e3e0d8; --line2:#eeece6;
-  --accent:#0f5d5b; --accent2:#13726f; --accent-lt:#dcefee;
-  --green:#15603b; --green-lt:#dcf3e6; --red:#8a2222; --red-lt:#fbe3e3;
-  --amber:#7a4a10; --amber-lt:#fbeccd;
+  --ink:#1a1d24; --ink2:#565b63; --ink3:#9098a1;
+  --bg:#ffffff; --line:#ececec; --line2:#f5f5f4;
+  --accent:#36546f; --accent-soft:#eef2f6;
+  --green:#2f6b4f; --green-lt:#eaf5ef; --red:#9a3b3b; --red-lt:#f7ebeb;
+  --amber:#8a6420; --amber-lt:#f6efe0;
 }
-[data-testid="stAppViewContainer"]{ background:var(--paper); }
-[data-testid="stMainBlockContainer"]{ max-width:1080px; padding-top:1.6rem; }
-html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; }
-
-/* Masthead — tiêu đề IN HOA font Agbalumo */
-.mast{ text-align:center; border-bottom:2px solid var(--ink); padding-bottom:1.1rem; margin-bottom:1.9rem; }
-.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-size:2.15rem; font-weight:400;
-  color:var(--accent); line-height:1.18; text-transform:uppercase; letter-spacing:.005em; margin:0; }
-.mast .s{ font-family:'Inter',sans-serif; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--ink3); margin-top:.55rem; }
-
-.slabel{ display:flex; align-items:center; gap:.55rem; font-size:.72rem; font-weight:600;
-  letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); margin:0 0 .7rem; }
-.slabel .n{ display:inline-flex; align-items:center; justify-content:center; width:21px;height:21px;
-  border-radius:50%; background:var(--accent); color:#fff; font-size:.68rem; font-weight:700; }
-[data-testid="stVerticalBlockBorderWrapper"]{ background:#fff; border-color:var(--line)!important; border-radius:8px!important; }
+[data-testid="stAppViewContainer"]{ background:var(--bg); }
+[data-testid="stMainBlockContainer"]{ max-width:1020px; padding-top:1.6rem; }
+html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
+.mast{ text-align:center; border-bottom:1px solid var(--line); padding-bottom:1.2rem; margin-bottom:2rem; }
+.mast .t{ font-family:'Agbalumo','Source Serif 4',serif; font-size:2.05rem; font-weight:400;
+  color:var(--ink); line-height:1.2; text-transform:uppercase; letter-spacing:.01em; margin:0; }
+.mast .s{ font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink3); margin-top:.6rem; }
+.slabel{ display:flex; align-items:center; gap:.55rem; font-size:.7rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink3); margin:0 0 .8rem; }
+.slabel .n{ display:inline-flex; align-items:center; justify-content:center; width:20px;height:20px;
+  border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.66rem; font-weight:700; }
+[data-testid="stVerticalBlockBorderWrapper"]{ background:#fff; border-color:var(--line)!important; border-radius:10px!important; }
 [data-testid="stNumberInput"] input{ font-family:'JetBrains Mono',monospace!important; text-align:center!important; }
-[data-testid="stSidebar"]{ background:var(--ink); }
-[data-testid="stSidebar"] *{ color:#dfe3e6!important; }
-[data-testid="stSidebar"] h1,[data-testid="stSidebar"] h2,[data-testid="stSidebar"] h3{
-  color:#fff!important; font-family:'Source Serif 4',serif!important; }
-.sb-greek{ font-family:'Agbalumo',serif; font-size:2.4rem; color:rgba(255,255,255,.85); line-height:1; }
-.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.4rem; color:#fff; line-height:1.1; }
-.sb-desc{ font-size:.72rem; color:rgba(255,255,255,.45); letter-spacing:.04em; }
-.sb-h{ font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:.2rem 0 .4rem;}
-.rline{ border-top:2px solid var(--ink); margin:2rem 0 1.2rem; }
-.pill{ display:inline-flex; align-items:center; gap:.4rem; font-size:.76rem; font-weight:700;
-  letter-spacing:.08em; text-transform:uppercase; padding:5px 14px; border-radius:100px; }
+[data-testid="stSidebar"]{ background:#fafaf9; border-right:1px solid var(--line); }
+[data-testid="stSidebar"] *{ color:var(--ink2)!important; }
+.sb-greek{ font-family:'Agbalumo',serif; font-size:2.1rem; color:var(--accent)!important; line-height:1; }
+.sb-brand{ font-family:'Source Serif 4',serif; font-size:1.3rem; color:var(--ink)!important; line-height:1.1; }
+.sb-desc{ font-size:.72rem; color:var(--ink3)!important; letter-spacing:.03em; }
+.sb-h{ font-size:.68rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--ink3)!important; margin:.2rem 0 .4rem;}
+.rline{ border-top:1px solid var(--line); margin:2rem 0 1.3rem; }
+.pill{ display:inline-flex; align-items:center; gap:.4rem; font-size:.74rem; font-weight:600;
+  letter-spacing:.07em; text-transform:uppercase; padding:5px 13px; border-radius:100px; }
 .p-opt{ background:var(--green-lt); color:var(--green);} .p-inf{ background:var(--red-lt); color:var(--red);}
 .p-unb{ background:var(--amber-lt); color:var(--amber);}
-.rcard{ background:#fff; border:1px solid var(--line); border-radius:8px; padding:1.1rem 1.3rem; }
-.rcard .zlb{ font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3);}
-.rcard .zv{ font-family:'Source Serif 4',serif; font-size:1.9rem; font-weight:700; color:var(--accent); }
+.rcard{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.3rem; }
+.rcard .zlb{ font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3);}
+.rcard .zv{ font-family:'Source Serif 4',serif; font-size:1.85rem; font-weight:700; color:var(--accent); }
 .rtab{ width:100%; border-collapse:collapse; font-family:'JetBrains Mono',monospace; font-size:.92rem; margin-top:.3rem;}
-.rtab th{ border-bottom:2px solid var(--ink); padding:6px 14px; color:var(--ink2); background:#faf9f6;}
+.rtab th{ border-bottom:1.5px solid var(--ink); padding:6px 14px; color:var(--ink2); background:#fbfbfa;}
 .rtab td{ border-bottom:1px solid var(--line2); padding:7px 14px; text-align:center; color:var(--ink);}
-div.stButton>button[kind="primary"]{ background:var(--accent)!important; border:none!important;
-  border-radius:6px!important; font-weight:600!important; }
-div.stButton>button[kind="primary"]:hover{ background:var(--accent2)!important; }
-[data-testid="stExpander"]{ border:1px solid var(--line2)!important; border-radius:6px!important; background:#fff!important;}
+div.stButton>button[kind="primary"]{ background:var(--ink)!important; border:none!important;
+  border-radius:8px!important; font-weight:600!important; letter-spacing:.02em!important; }
+div.stButton>button[kind="primary"]:hover{ background:#000!important; }
+[data-testid="stExpander"]{ border:1px solid var(--line)!important; border-radius:8px!important; background:#fff!important;}
 h1,h2,h3,h4{ color:var(--ink)!important; } hr{ border-color:var(--line); }
 </style>
 """, unsafe_allow_html=True)
@@ -84,52 +78,6 @@ def latex_expr(coeffs):
         t = f"{co}x_{{{i+1}}}"
         terms.append((f"-{t}" if c < 0 else t) if not terms else (f"- {t}" if c < 0 else f"+ {t}"))
     return " ".join(terms) if terms else "0"
-
-def latex_frac(v):
-    v = Fraction(v)
-    if v.denominator == 1: return str(v.numerator)
-    sg = '-' if v < 0 else ''
-    return sg + r"\frac{" + str(abs(v.numerator)) + "}{" + str(v.denominator) + "}"
-
-def build_latex_document(sense, obj, constraints, signs, res, rule):
-    OPT = {'<=': r'\leq', '>=': r'\geq', '=': '='}
-    direction = r'\max' if sense == 'max' else r'\min'
-    nn  = [f'x_{{{i+1}}}' for i, s in enumerate(signs) if s == '>=0']
-    npz = [f'x_{{{i+1}}}' for i, s in enumerate(signs) if s == '<=0']
-    fr  = [f'x_{{{i+1}}}' for i, s in enumerate(signs) if s == 'free']
-    sp = []
-    if nn:  sp.append(", ".join(nn) + r" \geq 0")
-    if npz: sp.append(", ".join(npz) + r" \leq 0")
-    if fr:  sp.append(", ".join(fr) + r"\ \text{tự do}")
-    sgn = r",\quad ".join(sp)
-    lines = [r"& " + direction + r" \; z = " + latex_expr(obj) + r" \\", r"& \text{ràng buộc:} \\"]
-    for (co, op, b) in constraints:
-        lines.append(r"& \quad " + latex_expr(co) + " " + OPT[op] + " " + latex_frac(b) + r" \\")
-    lines.append(r"& \quad " + sgn)
-    body = "\n".join(lines)
-    status = res['status']
-    if status == 'optimal':
-        sol = r",\quad ".join(f"x_{{{i+1}}} = " + latex_frac(v) for i, v in enumerate(res['x']))
-        rblock = r"\[ z^* = " + latex_frac(res['opt_value']) + r" \]" + "\n" + r"\[ " + sol + r" \]"
-    elif status == 'infeasible':
-        rblock = r"Bài toán \textbf{vô nghiệm} --- miền ràng buộc rỗng."
-    else:
-        rblock = r"Bài toán \textbf{không giới nội}."
-    steps = ""
-    for k, stp in enumerate(res.get('steps', []), 1):
-        steps += (r"\textbf{Bước " + str(k) + " --- " + stp['phase'] +
-                  " (vào " + stp['enter'] + ", ra " + stp['leave'] + ")}\n")
-        steps += r"\begin{verbatim}" + "\n" + stp['dict_before'] + "\n" + r"\end{verbatim}" + "\n\n"
-    if status == 'optimal':
-        steps += r"\textbf{Từ vựng tối ưu}" + "\n" + r"\begin{verbatim}" + "\n" + res['final_dict'] + "\n" + r"\end{verbatim}" + "\n"
-    D = [r"\documentclass[12pt,a4paper]{article}", r"\usepackage[utf8]{inputenc}",
-         r"\usepackage[T5]{fontenc}", r"\usepackage[vietnamese]{babel}",
-         r"\usepackage{amsmath,amssymb,geometry}", r"\geometry{margin=2.5cm}",
-         r"\title{Bài toán Quy hoạch tuyến tính}", r"\date{}", r"\begin{document}", r"\maketitle", "",
-         r"\section*{Đề bài}", r"\begin{align*}", body, r"\end{align*}", "",
-         r"\section*{Lời giải (đơn hình dạng từ vựng, quy tắc " + rule + ")}", steps,
-         r"\section*{Kết quả}", rblock, "", r"\end{document}"]
-    return "\n".join(D)
 
 DEF = {'obj':[3,2], 'cons':[([1,2],'≤',6),([2,1],'≤',8),([0,1],'≤',2)], 'signs':['x ≥ 0','x ≥ 0']}
 OPS=['≤','≥','=']; OPMAP={'≤':'<=','≥':'>=','=':'='}; OPTEX={'<=':r'\leq','>=':r'\geq','=':'='}
@@ -261,11 +209,3 @@ if go:
         if status == 'optimal':
             with st.expander('✓ Từ vựng cuối — NGHIỆM TỐI ƯU', expanded=True):
                 st.code(res['final_dict'], language='text')
-
-    st.markdown('<div style="height:.8rem"></div>', unsafe_allow_html=True)
-    slabel('↧', 'Xuất báo cáo LaTeX')
-    tex = build_latex_document(sense, obj, constraints, signs, res, rule)
-    st.download_button('⬇  Tải file .tex', data=tex.encode('utf-8'),
-                       file_name='loi_giai_qhtt.tex', mime='text/plain', type='primary')
-    with st.expander('Xem nội dung file .tex'):
-        st.code(tex, language='latex')
