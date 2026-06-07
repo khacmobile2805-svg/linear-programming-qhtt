@@ -32,20 +32,50 @@ LinearProgramming/
         └── formatting.py       # định dạng phân số
 ```
 
-## Cài đặt & chạy
+## Hướng dẫn chạy (chi tiết)
+
+> Yêu cầu: đã cài **Python 3.9 trở lên**. Kiểm tra bằng cách mở terminal gõ:
+> `python --version` — nếu hiện số phiên bản là được. Chưa có thì tải tại
+> [python.org/downloads](https://www.python.org/downloads/) (khi cài nhớ tích
+> **"Add Python to PATH"**).
+
+**Bước 1 — Mở dự án.** Mở **VS Code** → menu **File → Open Folder…** → chọn thư mục
+`LinearProgramming` (thư mục có chứa `app.py`).
+
+**Bước 2 — Mở Terminal.** Trong VS Code, menu **Terminal → New Terminal**. Dòng lệnh
+sẽ tự đứng ở đúng thư mục dự án.
+
+**Bước 3 — Cài thư viện** (chỉ cần làm lần đầu):
 
 ```bash
 pip install -r requirements.txt
+```
+
+**Bước 4 — Chạy chương trình:**
+
+```bash
 streamlit run app.py
 ```
 
-Trình duyệt mở tại `http://localhost:8501`.
+Trình duyệt sẽ **tự mở** tại `http://localhost:8501`. Nếu không tự mở, hãy copy địa
+chỉ đó dán vào trình duyệt.
 
-## Kiểm thử
+**Dừng chương trình:** quay lại terminal, nhấn **Ctrl + C**.
+
+### Lỗi thường gặp
+
+| Báo lỗi | Cách xử lý |
+|---|---|
+| `'streamlit' is not recognized` / `command not found` | Chạy bằng: `python -m streamlit run app.py` |
+| `'pip' is not recognized` | Chạy bằng: `python -m pip install -r requirements.txt` |
+| `can't open file 'app.py'` | Đang sai thư mục — dùng `cd` vào đúng thư mục chứa `app.py` rồi chạy lại |
+| `ModuleNotFoundError: No module named 'backend'` | Phải chạy lệnh tại thư mục gốc (nơi có `app.py` và thư mục `backend`), không chạy bên trong `backend` |
+
+## Kiểm thử (tùy chọn)
 
 ```bash
-python test_cases.py     # 10 ca kiểm thử
-python demo.py           # in các từ vựng từng bước
+python test_cases.py     # chạy 10 ca kiểm thử tự động
+python demo.py           # in lời giải + các từ vựng từng bước ra màn hình
 ```
 
 ## Triển khai (Streamlit Community Cloud)
