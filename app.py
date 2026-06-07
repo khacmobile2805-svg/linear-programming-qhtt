@@ -17,7 +17,7 @@ st.markdown("""
   --line:#e4e9f0; --bg:#f6f8fb; --card:#ffffff;
 }
 .stApp{ background:var(--bg); }
-html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
+html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; }
 
 /* Hero */
 .hero{ background:linear-gradient(135deg,#1f5f8b 0%,#2e8b87 100%); color:#fff;
@@ -34,7 +34,7 @@ html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(
 .sec{ display:flex; align-items:center; gap:.65rem; margin:1.5rem 0 .7rem; }
 .sec .n{ background:var(--accent); color:#fff; min-width:1.75rem; height:1.75rem; border-radius:9px;
   display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.95rem; }
-.sec h3{ margin:0; font-size:1.14rem; font-weight:600; }
+.sec h3{ margin:0; font-size:1.14rem; font-weight:600; color:#1a2230; }
 
 /* Sidebar */
 [data-testid="stSidebar"]{ background:#0f2233; }
@@ -178,7 +178,6 @@ if st.button('🚀  GIẢI BÀI TOÁN', type='primary', use_container_width=True
         st.code(res.get('legend',''), language='text')
 
     if show_dict and res.get('steps'):
-        
         sec('⑥', 'Các từ vựng từng bước')
         for k,stp in enumerate(res['steps'],1):
             tag = ' 🔸suy biến' if stp.get('degenerate_step') else ''
