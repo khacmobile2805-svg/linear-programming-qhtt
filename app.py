@@ -16,12 +16,16 @@ st.markdown("""
 :root{
   --ink:#1c2230; --ink2:#4a5160; --ink3:#8a93a3;
   --bg:#f4f6fb; --panel:#ffffff; --line:#e7eaf0; --line2:#f0f2f6;
-  --field:#1f242e; --field-bd:#2b3340; --field-tx:#eef1f6;
+  /* Đã sửa màu ô input: nền xám nhạt, viền xám, chữ đen */
+  --field:#e9ecef; --field-bd:#ced4da; --field-tx:#1c2230;
   --accent:#1d4ed8; --accent2:#1e40af; --accent-soft:#e7eefc;
   --green:#2f6b4f; --green-lt:#e6f4ec; --red:#9a3b3b; --red-lt:#f7eaea;
   --amber:#8a6420; --amber-lt:#f6efde;
 }
-[data-testid="stAppViewContainer"]{ background:var(--bg); }
+
+/* Chia đôi background: Nửa trái màu nền cũ (#f4f6fb), nửa phải màu trắng tinh (#ffffff) */
+[data-testid="stAppViewContainer"]{ background: linear-gradient(90deg, var(--bg) 50%, #ffffff 50%); }
+[data-testid="stHeader"] { background-color: transparent !important; }
 [data-testid="stMainBlockContainer"]{ max-width:1100px; padding-top:2.8rem; }
 html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(--ink); }
 
@@ -43,15 +47,16 @@ html, body, [class*="css"]{ font-family:'Inter',system-ui,sans-serif; color:var(
   border-radius:12px!important; box-shadow:0 1px 3px rgba(20,30,50,.05); transition:box-shadow .2s ease; }
 [data-testid="stVerticalBlockBorderWrapper"]:hover{ box-shadow:0 6px 20px rgba(20,30,50,.09); }
 
-/* Ô NHẬP MÀU ĐEN, chữ sáng, bo góc, viền sáng khi focus */
+/* Ô NHẬP LIỆU: bo góc, viền sáng khi focus */
 [data-testid="stNumberInput"] input{ background:var(--field)!important; color:var(--field-tx)!important;
+  -webkit-text-fill-color: var(--field-tx) !important;
   border:1px solid var(--field-bd)!important; border-radius:8px!important;
   font-family:'JetBrains Mono',monospace!important; text-align:center!important; transition:border-color .15s, box-shadow .15s; }
 [data-testid="stNumberInput"] input:focus{ border-color:var(--accent)!important; box-shadow:0 0 0 3px var(--accent-soft)!important; }
 [data-testid="stNumberInput"] button{ background:var(--field)!important; color:var(--field-tx)!important; border-color:var(--field-bd)!important; }
-[data-testid="stNumberInput"] button:hover{ background:#2a3240!important; }
+[data-testid="stNumberInput"] button:hover{ background:#d1d5db!important; }
 [data-baseweb="select"]>div{ background:var(--field)!important; border:1px solid var(--field-bd)!important; border-radius:8px!important; }
-[data-baseweb="select"] div, [data-baseweb="select"] span{ color:var(--field-tx)!important; font-family:'JetBrains Mono',monospace!important; }
+[data-baseweb="select"] div, [data-baseweb="select"] span{ color:var(--field-tx)!important; -webkit-text-fill-color: var(--field-tx) !important; font-family:'JetBrains Mono',monospace!important; }
 [data-baseweb="select"] svg{ fill:var(--field-tx)!important; }
 ul[role="listbox"]{ background:#fff!important; }
 li[role="option"]{ color:var(--ink)!important; background:#fff!important; }
@@ -108,7 +113,7 @@ DEF = {'obj':[3,2], 'cons':[([1,2],'≤',6),([2,1],'≤',8),([0,1],'≤',2)], 's
 OPS=['≤','≥','=']; OPMAP={'≤':'<=','≥':'>=','=':'='}; OPTEX={'<=':r'\leq','>=':r'\geq','=':'='}
 SIGNS=['x ≥ 0','x ≤ 0','tự do']; SMAP={'x ≥ 0':'>=0','x ≤ 0':'<=0','tự do':'free'}
 
-# ──────────────────── Sidebar (đã bỏ Nạp ví dụ + caption) ────────────────────
+# ──────────────────── Sidebar ────────────────────
 with st.sidebar:
     st.markdown('<div class="sb-brand">Linear Programming Solver</div>'
                 '<div class="sb-desc">Quy hoạch tuyến tính · K23</div><hr>', unsafe_allow_html=True)
