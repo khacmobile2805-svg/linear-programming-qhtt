@@ -27,7 +27,17 @@ def solve(sense, obj, constraints, var_signs, rule='dantzig') -> dict:
     x = [sum(mul*vstd[idx] for idx, mul in S.recover[j])
          for j in range(len(S.recover))]
     opt      = -D.z0 if S.was_max else D.z0
-    multiple = any(D.d[j] == 0 for j in range(len(D.N)))
+    # Cặp cột (x+, x-) của biến tự do là âm của nhau -> luôn tạo d_j=0 "giả".
+    # Loại trừ cặp này để không báo "vô số nghiệm" sai.
+    free_pairs = {}
+    for cols in S.recover:
+        if len(cols) == 2:
+            a, b = cols[0][0], cols[1][0]
+            free_pairs[a] = b; free_pairs[b] = a
+    _basic = set(D.B)
+    def _spurious(col):
+        return col in free_pairs and free_pairs[col] in _basic
+    multiple = any(D.d[j] == 0 and not _spurious(D.N[j]) for j in range(len(D.N)))
     # ⑧ phát hiện suy biến: biến cơ sở = 0 tại nghiệm tối ưu
     degenerate = any(D.b[i] == Fraction(0) for i in range(m))
 
