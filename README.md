@@ -4,6 +4,9 @@
 **đơn hình dạng từ vựng (dictionary simplex) hai pha**, tính toán bằng **phân số chính xác**
 (không sai số làm tròn). Giao diện viết bằng Streamlit.
 
+> **Môn học:** Quy hoạch tuyến tính · **GVHD:** Assoc. Prof. Nguyễn Lê Hoàng Anh
+> **Sinh viên:** Nguyễn Khắc Trọng — 23110217 · Khoa Toán – Tin học, Trường ĐH KHTN – ĐHQG TP.HCM
+
 ---
 
 ## 1. Tính năng
@@ -100,6 +103,7 @@ python demo.py           # in lời giải + các từ vựng từng bước
 
 ## 8. Tài liệu tham khảo
 
-- R. J. Vanderbei, *Linear Programming: Foundations and Extensions*, 5th ed., Springer, 2020.
-- R. G. Bland, "New finite pivoting rules for the simplex method," *Math. of OR*, 2(2):103–107, 1977.
+- Phan Quốc Khánh, Trần Huệ Nương, *Quy hoạch tuyến tính (Giáo trình hoàn chỉnh)*, Nhà xuất bản Giáo dục.
+- Bài giảng và ghi chép trên lớp, học phần Quy hoạch tuyến tính (GV: Assoc. Prof. Nguyễn Lê Hoàng Anh), Khoa Toán – Tin học, Trường ĐH KHTN – ĐHQG TP.HCM.
+- R. G. Bland, "New finite pivoting rules for the simplex method," *Mathematics of Operations Research*, 2(2):103–107, 1977.
 - Tài liệu Streamlit (https://docs.streamlit.io) và Python (https://docs.python.org).
