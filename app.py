@@ -211,9 +211,10 @@ with st.container(border=True):
     obj_raw=[]; cols=st.columns(n)
     for j in range(n):
         d = str(DEF['obj'][j]) if j < len(DEF['obj']) else '0'
+        val = '' if d == '0' else d
         with cols[j]:
             st.markdown(f'<div style="text-align:center;font-family:JetBrains Mono;color:#8a93a3">x<sub>{j+1}</sub></div>', unsafe_allow_html=True)
-            obj_raw.append(st.text_input(f'c{j+1}', value=d, key=f'o{j}', label_visibility='collapsed'))
+            obj_raw.append(st.text_input(f'c{j+1}', value=val, placeholder='0', key=f'o{j}', label_visibility='collapsed'))
 
 with st.container(border=True):
     slabel('③', 'Hệ ràng buộc')
@@ -222,13 +223,15 @@ with st.container(border=True):
         cols=st.columns([*([1]*n), .7, 1.1]); row=[]
         for j in range(n):
             d = str(DEF['cons'][i][0][j]) if (i < len(DEF['cons']) and j < len(DEF['cons'][i][0])) else '0'
-            with cols[j]: row.append(st.text_input(f'a{i}{j}', value=d, key=f'a{i}{j}', label_visibility='collapsed'))
+            val = '' if d == '0' else d
+            with cols[j]: row.append(st.text_input(f'a{i}{j}', value=val, placeholder='0', key=f'a{i}{j}', label_visibility='collapsed'))
         with cols[n]:
             dop = DEF['cons'][i][1] if i < len(DEF['cons']) else '≤'
             op = st.selectbox(f'op{i}', OPS, index=OPS.index(dop), key=f'op{i}', label_visibility='collapsed')
         with cols[n+1]:
             db = str(DEF['cons'][i][2]) if i < len(DEF['cons']) else '0'
-            rhs = st.text_input(f'b{i}', value=db, key=f'b{i}', label_visibility='collapsed')
+            valb = '' if db == '0' else db
+            rhs = st.text_input(f'b{i}', value=valb, placeholder='0', key=f'b{i}', label_visibility='collapsed')
         cons_raw.append((row, OPMAP[op], rhs))
 
 with st.container(border=True):
@@ -251,7 +254,7 @@ except (ValueError, ZeroDivisionError):
 
 with st.container(border=True):
     slabel('≡', 'Xem trước bài toán')
-    st.caption('Mẹo: hệ số có thể nhập phân số (vd 1/3, -2/5), thập phân (0.5) hoặc số nguyên.')
+    st.caption('Mẹo: hệ số có thể nhập phân số (vd 1/3, -2/5), thập phân (0.5) hoặc số nguyên. Ô để trống = 0.')
     if not parse_ok:
         st.warning('Có hệ số nhập chưa hợp lệ — chỉ dùng số nguyên, thập phân hoặc phân số dạng a/b.')
     else:
@@ -297,23 +300,24 @@ if go:
 
         # ── Kiểm chứng nghiệm: thay vào ràng buộc gốc ──
         st.markdown('<div style="height:1rem"></div>', unsafe_allow_html=True)
-        with st.expander('✓ Kiểm chứng nghiệm (thay vào ràng buộc gốc)', expanded=False):
-            OPV = {'<=':'≤','>=':'≥','=':'='}
-            rows = ''
-            for i, c in enumerate(res['checks'], 1):
-                mark = '✓' if c['ok'] else '✗'
-                rows += (f"<tr><td>RB {i}</td><td>{fmt(c['lhs'])}</td>"
-                         f"<td>{OPV[c['op']]}</td><td>{fmt(c['rhs'])}</td><td>{mark}</td></tr>")
-            st.markdown(
-                f'<table class="rtab"><thead><tr><th>Ràng buộc</th><th>Vế trái</th>'
-                f'<th>Dấu</th><th>Vế phải</th><th>Đạt</th></tr></thead><tbody>{rows}</tbody></table>',
-                unsafe_allow_html=True)
-            st.markdown(f'<div style="margin-top:.7rem;font-family:JetBrains Mono">'
-                        f'z tính lại từ nghiệm = <b>{fmt(res["z_check"])}</b></div>', unsafe_allow_html=True)
-            if res['all_ok']:
-                st.success('Nghiệm thỏa mãn TẤT CẢ ràng buộc gốc — kết quả được kiểm chứng đúng.')
-            else:
-                st.error('Có ràng buộc chưa thỏa — vui lòng kiểm tra lại dữ liệu nhập.')
+        if res.get('checks') is not None:
+            with st.expander('✓ Kiểm chứng nghiệm (thay vào ràng buộc gốc)', expanded=False):
+                OPV = {'<=':'≤','>=':'≥','=':'='}
+                rows = ''
+                for i, c in enumerate(res['checks'], 1):
+                    mark = '✓' if c['ok'] else '✗'
+                    rows += (f"<tr><td>RB {i}</td><td>{fmt(c['lhs'])}</td>"
+                             f"<td>{OPV[c['op']]}</td><td>{fmt(c['rhs'])}</td><td>{mark}</td></tr>")
+                st.markdown(
+                    f'<table class="rtab"><thead><tr><th>Ràng buộc</th><th>Vế trái</th>'
+                    f'<th>Dấu</th><th>Vế phải</th><th>Đạt</th></tr></thead><tbody>{rows}</tbody></table>',
+                    unsafe_allow_html=True)
+                st.markdown(f'<div style="margin-top:.7rem;font-family:JetBrains Mono">'
+                            f'z tính lại từ nghiệm = <b>{fmt(res["z_check"])}</b></div>', unsafe_allow_html=True)
+                if res.get('all_ok'):
+                    st.success('Nghiệm thỏa mãn TẤT CẢ ràng buộc gốc — kết quả được kiểm chứng đúng.')
+                else:
+                    st.error('Có ràng buộc chưa thỏa — vui lòng kiểm tra lại dữ liệu nhập.')
     elif status == 'unbounded':
         st.markdown('<span class="pill p-unb">∞ Không giới nội (Unbounded)</span>', unsafe_allow_html=True)
     elif status == 'infeasible':
