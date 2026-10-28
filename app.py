@@ -267,7 +267,7 @@ with st.container(border=True):
 
 st.markdown('<br>', unsafe_allow_html=True)
 col_b,_ = st.columns([1.2,4])
-with col_b: go = st.button('GIẢI BÀI TOÁN', type='primary', use_container_width=True)
+with col_b: go = st.button('GIẢI BÀI TOÁN', type='primary', width='stretch')
 
 if go:
     if not parse_ok:
@@ -330,7 +330,7 @@ if go:
     if n == 2 and status in ('optimal','unbounded','infeasible'):
         st.markdown('<div style="height:1rem"></div>', unsafe_allow_html=True)
         slabel('④', 'Phương pháp hình học')
-        try: st.pyplot(geo_draw(sense, obj_f, cons_f, signs, res), use_container_width=True)
+        try: st.pyplot(geo_draw(sense, obj_f, cons_f, signs, res), width='stretch')
         except Exception as e: st.warning(f'Không vẽ được: {e}')
 
     with st.expander('Cách đặt biến phụ (đưa về dạng chuẩn)'):
